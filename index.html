@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> timer</title>
+    </head>
+    <body>
+<div class="timer">00:00:00</div>
+
+    <button class="btn_time">Встановити таймер</button>
+    <button class="btn_start">Старт</button>
+    <button class="btn_stop">Стоп</button>
+        
+    <script>
+        function getE(a) {
+            return document.querySelector(a);
+        }   
+        var hours = 0;
+        var minutes = 0;
+        var seconds = 0;
+        var hoursString = '00';
+        var minutesString = '00';
+        var secondsString = '00';
+        var timerId;
+        getE('.btn_time').onclick=function () {
+            var input = parseInt(prompt('Введіть час в векундах'));
+            hours = Math.floor(input / (60 * 60));
+            input = input % (60 * 60);
+            minutes = Math.floor(input / 60);
+            input = input % 60;
+            seconds = input;
+            hoursString = (hours >= 10) ? hours.toString() : '0' + hours.toString();
+            minutesString = (minutes >= 10) ? minutes.toString() : '0' + minutes.toString();
+            secondsString = (seconds >= 10) ? seconds.toString() : '0' + seconds.toString();
+            getE('.timer').innerHTML = (( hoursString + ':' + '') + minutesString + ':' + secondsString) ;
+            }
+        
+        getE('.btn_start').onclick =function() {
+       
+        timerId = setInterval(function() {
+           setTimePage(hours,minutes,seconds); 
+		  if (seconds == 0) { 
+			  if (minutes == 0) { 
+				  if (hours == 0) {
+				        alert('Час вийшов!');
+				  }
+				  else {
+					  hours--;
+					  minutes = 59; 
+					  seconds = 59; 
+				  }
+			  }
+			  else {
+				  minutes--; 
+				  seconds = 59; 
+			  }
+		  } else {
+			  seconds--; 
+			 
+		}
+		setTimePage(hours,minutes,seconds); 
+		}, 1000)    ;
+	
+        function setTimePage(hours,minutes,seconds) { 
+            hoursString = (hours >= 10) ? hours.toString() : '0' + hours.toString();
+            minutesString = (minutes >= 10) ? minutes.toString() : '0' + minutes.toString();
+            secondsString = (seconds >= 10) ? seconds.toString() : '0' + seconds.toString();
+            getE('.timer').innerHTML = (( hoursString + ':' + '') + minutesString + ':' + secondsString) ;
+            }
+        }
+            
+            
+        getE('.btn_stop').onclick =function() {
+    	    clearInterval(timerId); 
+        }    
+            
+           
+    </script>
+    </body>
+</html>
