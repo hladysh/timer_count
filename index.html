@@ -35,14 +35,14 @@
             getE('.timer').innerHTML = (( hoursString + ':' + '') + minutesString + ':' + secondsString) ;
             }
         
-        getE('.btn_start').onclick =function() {
-       
+        getE('.btn_start').onclick =function timers() {
+         
         timerId = setInterval(function() {
            setTimePage(hours,minutes,seconds); 
 		  if (seconds == 0) { 
 			  if (minutes == 0) { 
 				  if (hours == 0) {
-				        alert('Час вийшов!');
+				        alert('Час вийшов!') ;
 				  }
 				  else {
 					  hours--;
@@ -56,11 +56,10 @@
 			  }
 		  } else {
 			  seconds--; 
-			 
 		}
 		setTimePage(hours,minutes,seconds); 
-		}, 1000)    ;
-	
+		}, 1000);
+	    
         function setTimePage(hours,minutes,seconds) { 
             hoursString = (hours >= 10) ? hours.toString() : '0' + hours.toString();
             minutesString = (minutes >= 10) ? minutes.toString() : '0' + minutes.toString();
@@ -73,7 +72,6 @@
         getE('.btn_stop').onclick =function() {
     	    clearInterval(timerId); 
         }    
-            
            
     </script>
     </body>
